@@ -95,7 +95,7 @@
 
 	const CUBE = new CubeGenerator();
 
-	CUBE.createNetwork(13, 13);
+	CUBE.createNetwork(27, 27);
 
 
 /***/ },

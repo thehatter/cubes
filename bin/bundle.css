@@ -9,6 +9,7 @@ body {
   background: #ccc;
   display: flex;
   flex-wrap: wrap;
+  margin: 0 auto;
   transform-style: preserve-3d;
   perspective: 0px;
   transform: translateZ(-400px) rotateZ(0deg) rotateX(60.5deg) rotateY(0deg);
