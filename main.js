@@ -1,5 +1,5 @@
 'use strict';
-require('./css/main.less');
+require('./css/main.scss');
 
 console.log('main js is working');
 
