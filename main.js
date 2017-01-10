@@ -23,9 +23,11 @@ function CubeGenerator() {
     let createdCels = document.querySelectorAll('.cell');
 
     function listenTo(element, index) {
-      element.addEventListener('click', function() {
-        console.log('cell number:'+ index + ' is clicked!');
-        createCube(index, 1);
+      element.addEventListener('click', function(e) {
+        if (e.target == element) {
+          console.log('cell number:'+ index + ' is clicked!');
+          createCube(e.target);
+        }
       });
     }
 
@@ -33,6 +35,7 @@ function CubeGenerator() {
       let item = createdCels[i];
       listenTo(item, i);
     }
+
   };
 
   function createNetworkCell(cellNumber) {
@@ -40,10 +43,20 @@ function CubeGenerator() {
            '" class="cell" style="height:60px; width: 60px;"></div>';
   }
 
-  function createCube(cellNumber, level){
-    let element = document.querySelector('.cell[data-cellnumber="'+cellNumber +'"]');
+  function createCube(container){
     let cube = '<div class="cube">'+ '<div class="side"></div>'.repeat(6) +'</div>';
-    element.innerHTML = element.innerHTML + cube;
+    container.innerHTML = container.innerHTML + cube;
+
+    let newCubeSides = container.querySelector(".cube .side");
+
+    newCubeSides.addEventListener('click', function(e) {
+      console.log('cube clicked is clicked!');
+      console.log(e.target);
+      if (!e.target.hasChildNodes()) {
+        createCube(e.target);
+      }
+    });
+
   }
 }
 

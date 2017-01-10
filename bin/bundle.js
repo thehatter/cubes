@@ -69,9 +69,11 @@
 	    let createdCels = document.querySelectorAll('.cell');
 
 	    function listenTo(element, index) {
-	      element.addEventListener('click', function() {
-	        console.log('cell number:'+ index + ' is clicked!');
-	        createCube(index, 1);
+	      element.addEventListener('click', function(e) {
+	        if (e.target == element) {
+	          console.log('cell number:'+ index + ' is clicked!');
+	          createCube(e.target);
+	        }
 	      });
 	    }
 
@@ -79,6 +81,7 @@
 	      let item = createdCels[i];
 	      listenTo(item, i);
 	    }
+
 	  };
 
 	  function createNetworkCell(cellNumber) {
@@ -86,10 +89,20 @@
 	           '" class="cell" style="height:60px; width: 60px;"></div>';
 	  }
 
-	  function createCube(cellNumber, level){
-	    let element = document.querySelector('.cell[data-cellnumber="'+cellNumber +'"]');
+	  function createCube(container){
 	    let cube = '<div class="cube">'+ '<div class="side"></div>'.repeat(6) +'</div>';
-	    element.innerHTML = element.innerHTML + cube;
+	    container.innerHTML = container.innerHTML + cube;
+
+	    let newCubeSides = container.querySelector(".cube .side");
+
+	    newCubeSides.addEventListener('click', function(e) {
+	      console.log('cube clicked is clicked!');
+	      console.log(e.target);
+	      if (!e.target.hasChildNodes()) {
+	        createCube(e.target);
+	      }
+	    });
+
 	  }
 	}
 
@@ -133,7 +146,7 @@
 
 
 	// module
-	exports.push([module.id, "body {\n  margin: 0;\n  background: #000; }\n\n.main {\n  position: relative;\n  perspective: 2000px; }\n\n.network-container {\n  background: #ccc;\n  display: flex;\n  flex-wrap: wrap;\n  margin: 0 auto;\n  transform-style: preserve-3d;\n  perspective: 0px;\n  transform: translateZ(-400px) rotateZ(0deg) rotateX(60.5deg) rotateY(0deg);\n  transition: transform 1s; }\n\n.cell:nth-child(even) {\n  background: #666; }\n\n.cube {\n  width: 100%;\n  height: 100%;\n  transform-style: preserve-3d;\n  transform: translateZ(30px); }\n\n.cube .side {\n  position: absolute;\n  background: none;\n  width: 60px;\n  height: 60px;\n  background: #ccc; }\n\n.cube .side:nth-child(1) {\n  transform: rotateY(0deg) translateZ(30px); }\n\n.cube .side:nth-child(2) {\n  transform: rotateX(180deg) translateZ(30px); }\n\n.cube .side:nth-child(3) {\n  transform: rotateY(90deg) translateZ(30px); }\n\n.cube .side:nth-child(4) {\n  transform: rotateY(-90deg) translateZ(30px); }\n\n.cube .side:nth-child(5) {\n  transform: rotateX(90deg) translateZ(30px); }\n\n.cube .side:nth-child(6) {\n  transform: rotateX(-90deg) translateZ(30px); }\n\n.cube .side:nth-child(1) {\n  background: #fff000; }\n\n.cube .side:nth-child(2) {\n  background: #999; }\n\n.cube .side:nth-child(3) {\n  background: #888; }\n\n.cube .side:nth-child(4) {\n  background: #fff; }\n\n.cube .side:nth-child(5) {\n  background: #fff; }\n\n.cube .side:nth-child(6) {\n  background: #D0EDED; }\n", ""]);
+	exports.push([module.id, "body {\n  margin: 0;\n  background: #000; }\n\n.main {\n  position: relative;\n  perspective: 2000px; }\n\n.network-container {\n  background: #ccc;\n  display: flex;\n  flex-wrap: wrap;\n  margin: 0 auto;\n  transform-style: preserve-3d;\n  perspective: 0px;\n  transform: translateZ(-400px) rotateZ(0deg) rotateX(60.5deg) rotateY(0deg);\n  transition: transform 1s; }\n\n.cell:nth-child(even) {\n  background: #666; }\n\n.cube {\n  position: relative;\n  width: 100%;\n  height: 100%;\n  transform-style: preserve-3d;\n  transform: translateZ(30px); }\n\n.cube .side {\n  transform-style: preserve-3d;\n  position: absolute;\n  background: none;\n  width: 60px;\n  height: 60px;\n  background: #ccc; }\n\n.cube .side:nth-child(1) {\n  transform: rotateY(0deg) translateZ(30px); }\n\n.cube .side:nth-child(2) {\n  transform: rotateX(180deg) translateZ(30px); }\n\n.cube .side:nth-child(3) {\n  transform: rotateY(90deg) translateZ(30px); }\n\n.cube .side:nth-child(4) {\n  transform: rotateY(-90deg) translateZ(30px); }\n\n.cube .side:nth-child(5) {\n  transform: rotateX(90deg) translateZ(30px); }\n\n.cube .side:nth-child(6) {\n  transform: rotateX(-90deg) translateZ(30px); }\n\n.cube .side:nth-child(1) {\n  background: #fff000; }\n\n.cube .side:nth-child(2) {\n  background: #999; }\n\n.cube .side:nth-child(3) {\n  background: #888; }\n\n.cube .side:nth-child(4) {\n  background: #fff; }\n\n.cube .side:nth-child(5) {\n  background: #fff; }\n\n.cube .side:nth-child(6) {\n  background: #D0EDED; }\n", ""]);
 
 	// exports
 
