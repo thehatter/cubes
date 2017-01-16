@@ -36,12 +36,26 @@ body {
 
 }
 
+.cube.s_side {
+  transform: translateZ( 30px ) rotateX(90deg);
+}
+
+.cube.e_side {
+  transform: translateZ( 30px ) rotateY(270deg);
+}
+
+.cube.w_side {
+  transform: translateZ( 30px ) rotateY(90deg);
+}
+
+
 .cube .side {
   transform-style: preserve-3d;
   position: absolute;
   background: none;
   width: 60px;
   height: 60px;
+  text-align: center;
 
   background: #ccc;
 }

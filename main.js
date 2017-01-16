@@ -44,14 +44,22 @@ function CubeGenerator() {
   }
 
   function createCube(container){
-    let cube = '<div class="cube">'+ '<div class="side"></div>'.repeat(6) +'</div>';
+    let cubeClass = container.className.split(' ')[1];
+    let cubeSides = `<div class="side up_side"></div>
+                     <div class="side down_side"></div>
+                     <div class="side e_side "></div>
+                     <div class="side w_side"></div>
+                     <div class="side n_side"></div>
+                     <div class="side s_side"></div>`;
+
+    let cube = '<div class="cube '+ cubeClass +'">'+ cubeSides +'</div>';
     container.innerHTML = container.innerHTML + cube;
 
     let newCubeSides = container.querySelector(".cube .side");
 
     newCubeSides.addEventListener('click', function(e) {
       console.log('cube clicked is clicked!');
-      console.log(e.target);
+      console.log(e.target.className);
       if (!e.target.hasChildNodes()) {
         createCube(e.target);
       }
